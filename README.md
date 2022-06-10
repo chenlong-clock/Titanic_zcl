@@ -50,26 +50,57 @@ _问题是以大家熟悉的泰坦尼克号为背景展开的，本次任务的�
 
 需要归一化的属性值：Age, Fare
 4. 相关性分析![](src/img/heatmap.png)
+通过相关性分析可以得出初步的结论：
 
+与存活率成正相关: Fare, Parch
+
+与存活率成负相关: Pclass, Sex, Age, SibSp, Embarked
+
+需要说明的是Sex和 Embarked是由字符型数值转变的，因此其正负相关的判别与转换编码的形式有关，无实际意义
 ## 数据预处理
 [[preprocess.py]](preprocess.py)
 
 数据的预处理包括：数据的清洗、数据的采样、数据集拆分、特征选择、特征降维、特征编码、规范化等。
 
-* 无关特征的删除:
-    * 有些项对预测分析是没有帮助的，可以直接删除。
-* 缺失值填充
-* 编码转换
-    * “性别”和“登船港口” 列的属性值是字符型，需要进行转换，把这些类别映射到一个数值。
-* 数据缩放
-    * 如“年龄”和“票价”两列的属性值相对其他列明显太大，在模型训练中会影响模型的准确性，因此需要把这两列的数值变换到一个0-1之间的数值。
+scaleList: ['Age', 'Fare'] 
 
+* 无关特征的删除:
+    * 有些项对预测分析是没有帮助的，可以直接删除。通过分析：uselessList: ['PassengerId', 'Name', 'Ticket', 'Cabin']直接删除 
+* 缺失值填充
+    * nanList: ['Age', 'Cabin', 'Embarked'] 存在缺失值，在训练时直接将缺失记录删除，在测试时将缺失值用上一条/下一条有效记录填充（需要说明的在测试时，这样的操作会导致测试精度下降）
+* 编码转换
+    * strList: ['Sex', 'Embarked'] “性别”和“登船港口” 列的属性值是字符型，需要进行转换，把这些类别映射到一个数值。（Sex:0, 1; Embarked:0, 1, 2）
+* 数据缩放
+    * scaleList: ['Age', 'Fare'] “年龄”和“票价”两列的属性值相对其他列明显太大，在模型训练中会影响模型的准确性，因此需要把这两列的数值变换到一个0-1之间的数值。b在本方案中使用了Z-score归一化
+
+处理前后数据：
+![](src/img/process.jpg)
 ## 模型的选择、训练和预测
 
 要求：
 
 **在学习过的分类算法中至少选择3种**分别进行模型的选择、训练和预测
 
+Chenlong Zhang中使用的方法：
+LogisticRegression
+
+DecisionTreeClassifier
+
+KNeighborsClassifier 
+
+SVC
+
+GaussianNBAdaBoostClassifier
+
+RandomForestClassifier
+
+GradientBoostingClassifier
+
+使用了10折交叉验证计算，得到训练集和测试集的准确率，并画出混淆矩阵
+准确率：
+![](src/img/model_result.jpg)
+混淆矩阵：
+![](src/img/confusion_matrix.png)
 ## 模型效果的评价及解释
 
 要求：
