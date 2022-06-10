@@ -102,8 +102,10 @@ RandomForestClassifier
 GradientBoostingClassifier
 
 使用了10折交叉验证计算，得到训练集和测试集的准确率，并画出混淆矩阵
+
 准确率：
 ![](src/img/model_result.jpg)
+
 混淆矩阵：
 ![](src/img/confusion_matrix.png)
 ## 模型效果的评价及解释
