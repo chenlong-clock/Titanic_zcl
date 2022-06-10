@@ -1,5 +1,4 @@
 import pandas as pd
-<<<<<<< HEAD
 import seaborn as sns
 import matplotlib.pyplot as plt
 
@@ -48,15 +47,4 @@ def getProcessList(pth) -> (list, list, list, list):
 
 
 getProcessList("dataset/titanic_train.csv")
-=======
-import matplotlib.pyplot as plt
-import os
 
-train_data = pd.read_csv("dataset/titanic_train.csv")
-
-# 先查看数据的大致信息
-print(train_data.describe())
-print(train_data.head())
-
-train_data['Survived']
->>>>>>> 2933a15a304f351c314b6665baf73fcc43630f69
