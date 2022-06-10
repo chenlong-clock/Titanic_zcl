@@ -8,6 +8,7 @@
 * 模型的选择、训练和预测
 * 模型效果的评价及解释
 * 参数调优
+* 结果提交
 * 总结
 ## 问题及数据集简介
 _问题是以大家熟悉的泰坦尼克号为背景展开的，本次任务的目的就是构建一个可以根据乘客个人信息，如性别、年龄、船舱等级等来推测乘客是否生存的**分类模型**。_
@@ -108,6 +109,11 @@ GradientBoostingClassifier
 使用**多次交叉验证法**评价不同的模型；
 要说明实验过程中是否有过拟合现象，若有，是如何处理的。
 
+通过观察上述10折交叉验证的准确率，可以看到对于决策树算法，画出决策树：
+![](src/img/plot_tree.png)
+发现，当决策树的深度特别深特别深以至于叶子节点中的对象只剩下一个或者很少，导致决策树的模型过于复杂，容易造成过拟合问题，泛化能力下降。因此可以通过预剪枝解决此问题。
+
+
 
 ## 参数调优
 
@@ -115,5 +121,31 @@ GradientBoostingClassifier
 
 暴力搜索寻优：网格搜索为自动化调参的常见技术之一，Scikit-learn提供的GridSearchCV函数可以根据给定的模型自动进行交叉验证，通过调节每一个参数来跟踪评分结果。从本质上说，该过程代替了进行参数搜索时使用的for循环过程。
 
+通过网格搜索法，得到部分最优的超参数如表格所示：
+
+|模型| 超参数|Best Train Acc|Best Val Acc|
+|:----|----|----|----|
+|DecisionTreeClassifier|'criterion': 'gini', 'max_depth': 16, 'max_leaf_nodes': 40|0.83|0.73
+|KNeighborsClassifier|'n_neighbors': 11|0.82|0.75|
+|SVC|'C': 1, 'gamma': 0.1, 'kernel': 'rbf'|0.82|0.83|
+|GaussianNBAdaBoostClassifier|'learning_rate': 0.5, 'n_estimators': 300|0.80|0.81|
+|RandomForestClassifier|'n_estimators': 700|0.78|0.77|
+|GradientBoostingClassifier|'learning_rate': 0.1, 'n_estimators': 100|0.82|0.78|
+将调参后的模型与调参前的数据进行对比，如图所示：
+![](src/img/opt_result.png)
+可以看到参数调优后，大部分模型的性能均有所上升，但是同时对于部分模型也出现了过拟合的情况
+## 结果提交
+将普通模型的结果和调优模型的结果提交至Kaggle平台
+[[Kaggle]](https://www.kaggle.com/competitions/titanic)
+最终得分如图所示：
+![](src/img/submission_result.jpg)
 ## 总结
 
+本次实验主要是使用多个机器学习的模型，预测泰坦尼克号生还人员，是一个二分类问题。使用到的技术主要有：
+* pandas：数据操作，通过pandas库对csv文件进行操作，并用dataframe读取、检索、遍历、操作数据
+* seaborn/matplotlib：绘制图像，用这两个库绘制柱状图、热力图、树状图等，用于数据处理后的分析、模型性能、泛化能力的评估以及对比
+* sklern：调用机器学习模型，并对模型进行训练、调优，对数据集进行预测，得出结果。
+
+本次实验主要包含了数据集的分析、预处理，模型选择、训练和评估，模型调优等过程
+
+通过此次实验，主要是提升了使用机器学习模型解决实际问题的能力，加深对于机器学习模型的理解，巩固了构建机器学习完成工程的代码能力。

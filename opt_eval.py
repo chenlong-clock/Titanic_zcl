@@ -1,9 +1,5 @@
-from sklearn.ensemble import AdaBoostClassifier, RandomForestClassifier, GradientBoostingClassifier
-from sklearn.linear_model import LogisticRegression
-from sklearn.naive_bayes import GaussianNB
-from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import AdaBoostClassifier
 from sklearn.svm import SVC
-from sklearn.tree import DecisionTreeClassifier
 import pandas as pd
 from analysis import getProcessList
 from preprocess import process

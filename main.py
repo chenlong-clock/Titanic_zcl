@@ -60,7 +60,7 @@ def main():
     sns.heatmap(confusion_matrix(train_Y, y_pred), ax=ax[2, 0], annot=True, fmt='2.0f')
     ax[2, 0].set_title('Naive Bayes')
     plt.subplots_adjust(hspace=0.2, wspace=0.2)
-    plt.show()
+    # plt.show()
     # 通过K折交叉验证之后进行测试，观察到决策树和梯度提升算法有一定的过拟合情况:
     # 对于决策树算法，画出决策树，发现，当决策树的深度特别深特别深以至于叶子节点中的对象只剩下一个或者很少，导致决策树的模型过于复杂，容易造成过拟合问题，泛化能力下降。因此可以通过预剪枝解决此问题。
     # 对于梯度提升算法，其原因与决策树类似。
@@ -164,7 +164,7 @@ def main():
         ax[idx].bar([1, 3], res_dict[n][1:4:2], color='b')
         for a, b in zip(range(4), res_dict[n]):
             ax[idx].text(a, b, '%.2f' % b, ha='center', va='bottom', fontsize=7)
-    # plt.show()
+    plt.show()
 
 
 if __name__ == '__main__':
