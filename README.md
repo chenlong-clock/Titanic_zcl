@@ -86,6 +86,7 @@ scaleList: ['Age', 'Fare']
 **在学习过的分类算法中至少选择3种**分别进行模型的选择、训练和预测
 
 Chenlong Zhang中使用的方法：
+
 LogisticRegression
 
 DecisionTreeClassifier
