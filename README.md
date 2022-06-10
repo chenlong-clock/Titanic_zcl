@@ -139,8 +139,10 @@ GradientBoostingClassifier
 |GaussianNBAdaBoostClassifier|'learning_rate': 0.5, 'n_estimators': 300|0.80|0.81|
 |RandomForestClassifier|'n_estimators': 700|0.78|0.77|
 |GradientBoostingClassifier|'learning_rate': 0.1, 'n_estimators': 100|0.82|0.78|
+
 将调参后的模型与调参前的数据进行对比，如图所示：
 ![](src/img/opt_result.png)
+
 可以看到参数调优后，大部分模型的性能均有所上升，但是同时对于部分模型也出现了过拟合的情况
 ## 结果提交
 将普通模型的结果和调优模型的结果提交至Kaggle平台
